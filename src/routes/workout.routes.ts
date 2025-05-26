@@ -1,12 +1,21 @@
-import { Router } from "express";
-import { authenticate, authorize } from "../middlewares/auth.middleware";
-import { bookWorkout, cancelWorkout, getAvailableWorkouts, getBookedWorkouts } from "../controllers/workout.controller";
+ // routes/workoutRoutes.ts
+import express from 'express';
+import { createWorkout } from '../controllers/Workout.controller';
+import { cancelWorkout } from '../controllers/Workout.controller';
+import { getBookedWorkouts } from '../controllers/Workout.controller';
+import { verifyToken } from '../middlewares/verifytoken.middlewares'; 
+import { requireClient } from '../middlewares/roles.middleware'; 
+const router = express.Router();
 
-const router = Router();
-
-router.get("/", getAvailableWorkouts); // get available workouts
-router.get("/booked/:userId", authenticate, authorize("client", "coach"), getBookedWorkouts); // get booked workouts for a user
-router.post("/book", authenticate, authorize("client"), bookWorkout); // book a workout slot
-router.delete("/cancel/:bookingId", authenticate, authorize("client"), cancelWorkout); // cancel a booked workout
-
+router.post('/workouts', verifyToken,requireClient, (req, res) => {
+  createWorkout(req, res); // This will only be executed if the token is valid
+});
+ 
+router.get('/workouts/booked', verifyToken, requireClient,(req, res) => {
+  getBookedWorkouts(req, res); // This will only be executed if the token is valid
+});
+ 
+router.patch('/workouts/:workoutId', verifyToken,requireClient, (req, res) => {
+  cancelWorkout(req, res); // This will only be executed if the token is valid
+});
 export default router;

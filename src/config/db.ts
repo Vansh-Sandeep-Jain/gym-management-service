@@ -1,18 +1,16 @@
 import mongoose from "mongoose";
-import { MONGODB_DB_NAME, MONGODB_URI } from "./constants";
+import dotenv from "dotenv";
 
-let isConnected = false;
+dotenv.config();
 
-const connectDB = async (): Promise<void> => {
-  if (isConnected) {
-    return;
-  }
+const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/test";
 
+const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(MONGODB_URI!, {dbName: MONGODB_DB_NAME!});
-    isConnected = true;
+    await mongoose.connect(MONGO_URI);
+    console.log("MongoDB Connected");
   } catch (error) {
-    console.error("❌ MongoDB connection error:", error);
+    console.error("MongoDB Connection Error:", error);
     process.exit(1);
   }
 };

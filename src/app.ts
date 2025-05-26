@@ -1,27 +1,22 @@
-import express from "express";
-import cors from "cors";
-import helmet from "helmet";
-import morgan from "morgan";
-import coachRoutes from "./routes/coach.routes";
-import workoutRoutes from "./routes/workout.routes";
-import feedbackRoutes from "./routes/feedback.routes";
-import slotRoutes from "./routes/slot.routes";
-const app = express();
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import workoutRoutes from './routes/workout.routes';
+import mongoose from 'mongoose';
+import feedbackRoutes from './routes/feedback.routes';
+import coachpageRoutes from './routes/coachpage.routes';
+import coachfeedbackRoutes from './routes/coachfeedback.routes';
 
+const app = express();
+// Middleware
 app.use(cors());
 app.use(helmet());
-app.use(morgan("dev"));
 app.use(express.json());
 
-app.use("/coaches", coachRoutes);
-app.use("/workouts", workoutRoutes);
-app.use("/feedbacks", feedbackRoutes);
-app.use("/slot", slotRoutes);
-
-
-// 404 handler 
-app.use((req, res) => {
-  res.status(404).json({ message: "Route not found" });
-});
+// Routes
+app.use('/dev/client', workoutRoutes);
+app.use('/dev/client', feedbackRoutes);
+app.use('/dev/coaches-page',coachpageRoutes);
+app.use('/dev/coaches-page',coachfeedbackRoutes);
 
 export default app;

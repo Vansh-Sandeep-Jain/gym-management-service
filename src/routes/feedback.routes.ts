@@ -1,9 +1,12 @@
-import { Router } from "express";
-import { authenticate, authorize } from "../middlewares/auth.middleware";
-import { createClientFeedback,createCoachFeedback } from "../controllers/feedback.controller";
-const router = Router();
+// routes/feedbackRoutes.ts
+import express from 'express';
+import { createFeedback } from '../controllers/Feedback.controller';
+import { verifyToken } from '../middlewares/verifytoken.middlewares'; // Adjust the import path as necessary
+import { requireClient } from '../middlewares/roles.middleware'; // Adjust the import path as necessary
+const router = express.Router();
 
-router.post("/coach/:slotId", authenticate, authorize("coach"), createCoachFeedback); // create feedback for a coach
-router.post("/client/:bookingId", authenticate, authorize("client"), createClientFeedback); // create feedback for a client
+router.post('/feedbacks',verifyToken,requireClient, (req, res) => {
+  createFeedback(req, res);
+});
 
 export default router;
