@@ -1,6 +1,6 @@
  import express from "express";
 import {validateFeedbackInput} from '../middlewares/coachFeedback.middleware';
-import { createCoachFeedback } from "../controllers/coachFeedback.controller";
+import { createCoachFeedback } from "../controllers/coachFeedbackController";
 import { verifyToken } from "../middlewares/verifytoken.middlewares";  
 import { requireCoach } from "../middlewares/roles.middleware";
 const router = express.Router();

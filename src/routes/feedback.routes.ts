@@ -1,6 +1,6 @@
 // routes/feedbackRoutes.ts
 import express from 'express';
-import { createFeedback } from '../controllers/Feedback.controller';
+import { createFeedback } from '../controllers/FeedbackController';
 import { verifyToken } from '../middlewares/verifytoken.middlewares'; // Adjust the import path as necessary
 import { requireClient } from '../middlewares/roles.middleware'; // Adjust the import path as necessary
 const router = express.Router();

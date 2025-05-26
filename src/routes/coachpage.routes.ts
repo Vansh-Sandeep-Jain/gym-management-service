@@ -1,7 +1,7 @@
  import exprees from 'express';
-import {cancelWorkout, getCoachWorkouts } from '../controllers/coachworkout.controller';
+import {cancelWorkout, getCoachWorkouts } from '../controllers/coachworkoutController';
 import { checkAlreadyCancelled } from '../middlewares/coachworkouts.middleware';
-import { createCoachFeedback } from '../controllers/coachFeedback.controller';
+import { createCoachFeedback } from '../controllers/coachFeedbackController';
 import { validateFeedbackInput } from '../middlewares/coachFeedback.middleware';
 import { verifyToken } from '../middlewares/verifytoken.middlewares';  
 import { requireCoach } from '../middlewares/roles.middleware';
