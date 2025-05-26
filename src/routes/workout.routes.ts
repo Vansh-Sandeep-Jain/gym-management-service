@@ -1,8 +1,8 @@
  // routes/workoutRoutes.ts
 import express from 'express';
-import { createWorkout } from '../controllers/Workout.controller';
-import { cancelWorkout } from '../controllers/Workout.controller';
-import { getBookedWorkouts } from '../controllers/Workout.controller';
+import { createWorkout } from '../controllers/WorkoutController';
+import { cancelWorkout } from '../controllers/WorkoutController';
+import { getBookedWorkouts } from '../controllers/WorkoutController';
 import { verifyToken } from '../middlewares/verifytoken.middlewares'; 
 import { requireClient } from '../middlewares/roles.middleware'; 
 const router = express.Router();
